@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Store } from "lucide-react";
 import {
   Conversation,
@@ -20,6 +20,12 @@ type ChatMessage = {
   role: "user" | "assistant";
   content: string;
 };
+
+function useHydrated() {
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+  return hydrated;
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
