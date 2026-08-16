@@ -149,12 +149,19 @@ function ChatPage() {
 
       <footer className="border-t border-border bg-card p-4">
         <div className="mx-auto max-w-3xl">
-          <PromptInput onSubmit={handleSubmit}>
-            <PromptInputTextarea placeholder="Type your message..." />
-            <PromptInputFooter className="justify-end">
-              <PromptInputSubmit disabled={isLoading} />
-            </PromptInputFooter>
-          </PromptInput>
+          {hydrated ? (
+            <PromptInput onSubmit={handleSubmit}>
+              <PromptInputTextarea placeholder="Type your message..." />
+              <PromptInputFooter className="justify-end">
+                <PromptInputSubmit disabled={isLoading} />
+              </PromptInputFooter>
+            </PromptInput>
+          ) : (
+            <div className="flex min-h-[4.5rem] items-end justify-between gap-2 rounded-lg border border-input bg-background px-3 py-2">
+              <div className="h-5 w-2/3 rounded bg-muted animate-pulse" />
+              <div className="h-8 w-8 rounded-full bg-muted animate-pulse" />
+            </div>
+          )}
         </div>
       </footer>
     </div>
