@@ -1,48 +1,54 @@
-# Northstar Chat Companion
+# Northstar Support Deflection MVP
 
-You are a senior full-stack dev. Vibe code a baseline chatbot for "Northstar Retail Co".
+## Project Overview
+Northstar Retail Co. is a mid-size e-commerce company whose support team is overwhelmed by repetitive tickets:
+1. Order status ("Where is my order?")
+2. Returns & refunds ("How do I return this?")
+3. Stock availability ("Is this back in stock?")
 
-Tech: Next.js 14 App Router, Tailwind, shadcn/ui, TypeScript
+Our 4–5 person pod was engaged for a 1-week sprint to deliver a **Support Deflection MVP**.  
+The MVP reduces manual handling for at least two of these categories, proving the approach works.
 
-Requirements:
+---
 
-1.  Single page at app/page.tsx
+## Deliverables
+- **Working Prototype (MVP):** Demoable end-to-end, covering ≥2 ticket types.
+- **Go-Live Readiness Note (1 page):** What works, what's broken, and what Northstar must do next.
+- **Audit Trail:** Commit/edit log + board tasks, proving collaborative work.
 
-2.  UI: Chat window with message history. User messages on right, Bot on left.
+---
 
-3.  Input box + Send button at bottom
+## Charter Board – Tasks (≤4 hrs each)
 
-4.  On send: POST to /api/chat with {message: string}
+| Task # | Title | Definition of Done | Est. Time |
+|--------|-------|--------------------|-----------|
+| 1 | Repo Setup | Repo created, branch naming convention documented in README | 2 hrs |
+| 2 | Chatbot Skeleton | Bot responds to “hello” with canned reply | 3 hrs |
+| 3 | Order Status API Integration | Bot returns shipping status from mock API | 4 hrs |
+| 4 | Returns Flow | Decision tree guides user to return portal + refund ETA | 4 hrs |
+| 5 | Stock Dashboard Stub | Page loads with placeholder inventory table | 4 hrs |
+| 6 | Go-Live Note Draft | 1-page doc skeleton with sections (works/broken/next steps) | 2 hrs |
+| 7 | Audit Logging Setup | Script exports commit log + board timestamps | 4 hrs |
+| 8 | Mid-Sprint Audit Snapshot | Export log + board status, check contribution balance | 3 hrs |
+| 9 | Chatbot Fallback Messages | Bot replies gracefully when query not recognized | 4 hrs |
+| 10 | Final Delivery Package | Prototype + audit log + go-live note zipped + submitted | 4 hrs |
 
-5.  Show "Northstar Support is typing..." while waiting
+---
 
-6.  For now, the /api/chat endpoint should just return: "Hello! I can help with Order Status or Returns. What's your order ID?"
+## Commit Convention
+All commits follow the format:
+<type>: <what changed> – <why it matters>
 
-7.  Make it look clean and mobile-friendly
+Examples:
+- `feat: chatbot skeleton – enables baseline bot reply`
+- `fix: API integration – corrected order status response`
+- `docs: add go-live note template – clarifies handoff steps`
 
-Return 2 files: 
+---
 
-File 1: app/page.tsx
+## Board Workflow
+- Columns: Backlog → To Do → In Progress → Review → Done
+- Status updates must be same-day as work.
+- No task >4 hrs; each has a single checkable Definition of Done.
 
-File 2: app/api/chat/route.ts
 
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/5c59a3b1-0ac0-4509-aeb0-544caeff9cb0).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
