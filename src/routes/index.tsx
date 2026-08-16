@@ -103,8 +103,8 @@ function ChatPage() {
   };
 
   return (
-    <div className="flex h-screen flex-col bg-background">
-      <header className="border-b border-border bg-card px-4 py-3">
+    <div className="flex h-screen flex-col bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950 dark:to-purple-900">
+      <header className="border-b border-border bg-card/80 px-4 py-3 backdrop-blur-sm">
         <div className="mx-auto flex max-w-3xl items-center gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary">
             <Store className="h-5 w-5 text-primary-foreground" />
