@@ -55,6 +55,7 @@ export const Route = createFileRoute("/")({
 function ChatPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const hydrated = useHydrated();
 
   const handleSubmit = async (
     { text }: { text: string; files: unknown[] },
