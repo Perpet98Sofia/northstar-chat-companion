@@ -6,7 +6,7 @@ Northstar Retail Co. is a mid-size e-commerce company whose support team is over
 2. Returns & refunds ("How do I return this?")
 3. Stock availability ("Is this back in stock?")
 
-Our 4–5 person pod was engaged for a 1-week sprint to deliver a **Support Deflection MVP**.  
+Our 5 person pod was engaged for a 1-week sprint to deliver a **Support Deflection MVP**.  
 The MVP reduces manual handling for at least two of these categories, proving the approach works.
 
 ---
