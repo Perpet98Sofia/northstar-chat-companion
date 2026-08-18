@@ -147,7 +147,7 @@ function ChatPage() {
         </Conversation>
       </main>
 
-      <footer className="border-t border-border bg-card p-4">
+      <footer className="border-t border-border bg-card/80 p-4 backdrop-blur-sm">
         <div className="mx-auto max-w-3xl">
           {hydrated ? (
             <PromptInput onSubmit={handleSubmit}>
