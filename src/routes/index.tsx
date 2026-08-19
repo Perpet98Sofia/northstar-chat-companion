@@ -188,16 +188,16 @@ function ChatPage() {
 
           <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
             <Button
-              variant="outline"
-              className="h-11 w-full border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
+              variant="default"
+              className="h-11 w-full"
               onClick={() => sendMessage("Check my order status")}
             >
               <Package className="h-4 w-4" />
               Check Order Status
             </Button>
             <Button
-              variant="outline"
-              className="h-11 w-full border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
+              variant="default"
+              className="h-11 w-full"
               onClick={() => sendMessage("I want to start a return or refund")}
             >
               <RotateCcw className="h-4 w-4" />
