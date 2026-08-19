@@ -22,10 +22,10 @@ export const Route = createFileRoute("/api/chat")({
           );
         }
 
-        const response =
+        const answer =
           "Hello! I can help with Order Status or Returns. What's your order ID?";
 
-        return new Response(JSON.stringify({ response }), {
+        return new Response(JSON.stringify({ answer }), {
           status: 200,
           headers: { "Content-Type": "application/json" },
         });
