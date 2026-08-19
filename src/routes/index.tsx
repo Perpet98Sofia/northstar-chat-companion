@@ -79,9 +79,9 @@ function ChatPage() {
 
       if (!res.ok) throw new Error("Request failed");
 
-      const data = (await res.json()) as { response?: string };
-      const response =
-        data.response ??
+      const data = (await res.json()) as { answer?: string };
+      const answer =
+        data.answer ??
         "Hello! I can help with Order Status or Returns. What's your order ID?";
 
       setMessages((prev) => [
