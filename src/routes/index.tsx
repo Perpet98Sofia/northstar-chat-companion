@@ -86,7 +86,7 @@ function ChatPage() {
 
       setMessages((prev) => [
         ...prev,
-        { id: crypto.randomUUID(), role: "assistant", content: response },
+        { id: crypto.randomUUID(), role: "assistant", content: answer },
       ]);
     } catch {
       setMessages((prev) => [
