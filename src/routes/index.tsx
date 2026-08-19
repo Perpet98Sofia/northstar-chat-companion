@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
-import { Store } from "lucide-react";
+import { Headset, Package, RotateCcw } from "lucide-react";
 import {
   Conversation,
   ConversationContent,
@@ -14,6 +14,8 @@ import {
   PromptInputSubmit,
   PromptInputTextarea,
 } from "@/components/ai-elements/prompt-input";
+import { Button } from "@/components/ui/button";
+import { Link } from "@tanstack/react-router";
 
 type ChatMessage = {
   id: string;
@@ -30,20 +32,20 @@ function useHydrated() {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Northstar Retail Co - Support Chat" },
+      { title: "Northstar Support MVP" },
       {
         name: "description",
         content:
-          "Chat with Northstar Support for order status, returns, and general help.",
+          "Get instant help with your Northstar orders, returns, and refunds.",
       },
       {
         property: "og:title",
-        content: "Northstar Retail Co - Support Chat",
+        content: "Northstar Support MVP",
       },
       {
         property: "og:description",
         content:
-          "Chat with Northstar Support for order status, returns, and general help.",
+          "Get instant help with your Northstar orders, returns, and refunds.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -52,15 +54,15 @@ export const Route = createFileRoute("/")({
   component: ChatPage,
 });
 
+const FALLBACK_ANSWER =
+  "Hello! I can help with Order Status or Returns. What's your order ID?";
+
 function ChatPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const hydrated = useHydrated();
 
-  const handleSubmit = async (
-    { text }: { text: string; files: unknown[] },
-    _event: FormEvent<HTMLFormElement>
-  ) => {
+  const sendMessage = async (text: string) => {
     const trimmed = text.trim();
     if (!trimmed || isLoading) return;
 
@@ -80,9 +82,7 @@ function ChatPage() {
       if (!res.ok) throw new Error("Request failed");
 
       const data = (await res.json()) as { answer?: string };
-      const answer =
-        data.answer ??
-        "Hello! I can help with Order Status or Returns. What's your order ID?";
+      const answer = data.answer ?? FALLBACK_ANSWER;
 
       setMessages((prev) => [
         ...prev,
@@ -102,68 +102,132 @@ function ChatPage() {
     }
   };
 
+  const handleSubmit = async (
+    { text }: { text: string; files: unknown[] },
+    _event: FormEvent<HTMLFormElement>
+  ) => {
+    await sendMessage(text);
+  };
+
   return (
-    <div className="flex h-screen flex-col bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950 dark:to-purple-900">
-      <header className="border-b border-border bg-card/80 px-4 py-3 backdrop-blur-sm">
+    <main className="flex min-h-screen flex-col bg-background">
+      <header className="border-b border-border bg-card px-4 py-4">
         <div className="mx-auto flex max-w-3xl items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary">
-            <Store className="h-5 w-5 text-primary-foreground" />
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary">
+            <Headset className="h-5 w-5 text-primary-foreground" />
           </div>
-          <div className="min-w-0">
-            <h1 className="truncate text-lg font-semibold text-foreground">
-              Northstar Support
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Here to help with orders & returns
-            </p>
-          </div>
+          <h1 className="text-lg font-semibold text-foreground">
+            Northstar Support MVP
+          </h1>
         </div>
       </header>
 
-      <main className="flex min-h-0 flex-1 flex-col">
-        <Conversation className="flex-1">
-          <ConversationContent>
-            {messages.length === 0 ? (
-              <ConversationEmptyState
-                icon={<Store className="h-8 w-8" />}
-                title="Northstar Support"
-                description="Ask about your order status, returns, or anything else."
-              />
-            ) : (
-              messages.map((m) => (
-                <Message key={m.id} from={m.role}>
-                  <MessageContent>{m.content}</MessageContent>
-                </Message>
-              ))
-            )}
-            {isLoading && (
-              <Message from="assistant">
-                <MessageContent>
-                  <Shimmer as="span">Northstar Support is typing...</Shimmer>
-                </MessageContent>
-              </Message>
-            )}
-          </ConversationContent>
-        </Conversation>
-      </main>
-
-      <footer className="border-t border-border bg-card/80 p-4 backdrop-blur-sm">
-        <div className="mx-auto max-w-3xl">
-          {hydrated ? (
-            <PromptInput onSubmit={handleSubmit}>
-              <PromptInputTextarea placeholder="Type your message..." />
-              <PromptInputFooter className="justify-end">
-                <PromptInputSubmit disabled={isLoading} />
-              </PromptInputFooter>
-            </PromptInput>
-          ) : (
-            <div className="flex min-h-[4.5rem] items-end justify-between gap-2 rounded-lg border border-input bg-background px-3 py-2">
-              <div className="h-5 w-2/3 rounded bg-muted animate-pulse" />
-              <div className="h-8 w-8 rounded-full bg-muted animate-pulse" />
+      <section className="flex flex-1 flex-col px-4 py-8 sm:py-12">
+        <div className="mx-auto w-full max-w-2xl">
+          <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+            <div className="border-b border-border px-4 py-3">
+              <h2 className="font-medium text-foreground">
+                Chat with Northstar Support
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                We typically reply in under a minute
+              </p>
             </div>
-          )}
+
+            <div className="h-[400px] sm:h-[480px]">
+              <Conversation className="h-full">
+                <ConversationContent>
+                  {messages.length === 0 ? (
+                    <ConversationEmptyState
+                      icon={<Headset className="h-8 w-8" />}
+                      title="Northstar Support"
+                      description="Ask about your order status, returns, or anything else."
+                    />
+                  ) : (
+                    messages.map((m) => (
+                      <Message key={m.id} from={m.role}>
+                        <MessageContent>{m.content}</MessageContent>
+                      </Message>
+                    ))
+                  )}
+                  {isLoading && (
+                    <Message from="assistant">
+                      <MessageContent>
+                        <Shimmer as="span">
+                          Northstar Support is typing...
+                        </Shimmer>
+                      </MessageContent>
+                    </Message>
+                  )}
+                </ConversationContent>
+              </Conversation>
+            </div>
+
+            <div className="border-t border-border p-3 sm:p-4">
+              {hydrated ? (
+                <PromptInput onSubmit={handleSubmit}>
+                  <PromptInputTextarea placeholder="Type your message..." />
+                  <PromptInputFooter className="justify-end">
+                    <PromptInputSubmit
+                      disabled={isLoading}
+                      size="sm"
+                      variant="default"
+                    >
+                      Send
+                    </PromptInputSubmit>
+                  </PromptInputFooter>
+                </PromptInput>
+              ) : (
+                <div className="flex min-h-[4.5rem] items-end justify-between gap-2 rounded-lg border border-input bg-background px-3 py-2">
+                  <div className="h-5 w-2/3 rounded bg-muted animate-pulse" />
+                  <div className="h-8 w-16 rounded-md bg-muted animate-pulse" />
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <Button
+              variant="default"
+              className="h-11 w-full"
+              onClick={() => sendMessage("Check my order status")}
+            >
+              <Package className="h-4 w-4" />
+              Check Order Status
+            </Button>
+            <Button
+              variant="default"
+              className="h-11 w-full"
+              onClick={() => sendMessage("I want to start a return or refund")}
+            >
+              <RotateCcw className="h-4 w-4" />
+              Start Return/Refund
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-border bg-card px-4 py-6">
+        <div className="mx-auto flex max-w-3xl flex-col items-center justify-between gap-4 sm:flex-row">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Northstar Retail Co
+          </p>
+          <nav className="flex items-center gap-6">
+            <Link
+              to="/"
+              className="text-sm text-muted-foreground hover:text-foreground"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              to="/"
+              className="text-sm text-muted-foreground hover:text-foreground"
+            >
+              Contact Support
+            </Link>
+          </nav>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }
