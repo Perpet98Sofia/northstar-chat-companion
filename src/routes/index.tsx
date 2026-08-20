@@ -110,13 +110,13 @@ function ChatPage() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col bg-background">
-      <header className="border-b border-border bg-card px-4 py-4">
+    <main className="flex min-h-screen flex-col bg-gradient-to-br from-brand/10 via-background to-brand-accent/10">
+      <header className="border-b-2 border-brand/30 bg-card/80 px-4 py-4 backdrop-blur-sm">
         <div className="mx-auto flex max-w-3xl items-center gap-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary">
-            <Headset className="h-5 w-5 text-primary-foreground" />
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-brand to-brand-accent">
+            <Headset className="h-5 w-5 text-brand-foreground" />
           </div>
-          <h1 className="text-lg font-semibold text-foreground">
+          <h1 className="bg-gradient-to-r from-brand to-brand-accent bg-clip-text text-lg font-semibold text-transparent">
             Northstar Support MVP
           </h1>
         </div>
@@ -124,8 +124,8 @@ function ChatPage() {
 
       <section className="flex flex-1 flex-col px-4 py-8 sm:py-12">
         <div className="mx-auto w-full max-w-2xl">
-          <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-            <div className="border-b border-border px-4 py-3">
+          <div className="overflow-hidden rounded-xl border border-brand/20 bg-card shadow-lg shadow-brand/10">
+            <div className="border-b border-brand/20 bg-brand/5 px-4 py-3">
               <h2 className="font-medium text-foreground">
                 Chat with Northstar Support
               </h2>
@@ -139,7 +139,7 @@ function ChatPage() {
                 <ConversationContent>
                   {messages.length === 0 ? (
                     <ConversationEmptyState
-                      icon={<Headset className="h-8 w-8" />}
+                      icon={<Headset className="h-8 w-8 text-brand" />}
                       title="Northstar Support"
                       description="Ask about your order status, returns, or anything else."
                     />
@@ -189,7 +189,7 @@ function ChatPage() {
           <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
             <Button
               variant="default"
-              className="h-11 w-full"
+              className="h-11 w-full bg-brand text-brand-foreground hover:bg-brand/90"
               onClick={() => sendMessage("Check my order status")}
             >
               <Package className="h-4 w-4" />
@@ -197,7 +197,7 @@ function ChatPage() {
             </Button>
             <Button
               variant="default"
-              className="h-11 w-full"
+              className="h-11 w-full bg-brand-accent text-brand-accent-foreground hover:bg-brand-accent/90"
               onClick={() => sendMessage("I want to start a return or refund")}
             >
               <RotateCcw className="h-4 w-4" />
@@ -207,7 +207,7 @@ function ChatPage() {
         </div>
       </section>
 
-      <footer className="border-t border-border bg-card px-4 py-6">
+      <footer className="border-t-2 border-brand-accent/30 bg-card/80 px-4 py-6 backdrop-blur-sm">
         <div className="mx-auto flex max-w-3xl flex-col items-center justify-between gap-4 sm:flex-row">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Northstar Retail Co
@@ -215,13 +215,13 @@ function ChatPage() {
           <nav className="flex items-center gap-6">
             <Link
               to="/"
-              className="text-sm text-muted-foreground hover:text-foreground"
+              className="text-sm text-muted-foreground hover:text-brand"
             >
               Privacy Policy
             </Link>
             <Link
               to="/"
-              className="text-sm text-muted-foreground hover:text-foreground"
+              className="text-sm text-muted-foreground hover:text-brand"
             >
               Contact Support
             </Link>
